@@ -1,0 +1,1 @@
+// Simplified App component with /generate and /deploy calls
