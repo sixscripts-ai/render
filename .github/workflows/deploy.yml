@@ -1,11 +1,21 @@
-name: Deploy to Render
+name: Deploy Backend & Frontend
+
 on:
   push:
     branches:
       - main
+
 jobs:
-  render-deploy:
+  deploy-backend:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
-      - run: curl -X POST ${{ secrets.RENDER_DEPLOY_HOOK_URL }}
+      - name: Checkout code
+        uses: actions/checkout@v3
+      - name: Trigger Backend Deploy
+        run: curl -X POST ${{ secrets.RENDER_DEPLOY_HOOK_URL }}
+
+  deploy-frontend:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Trigger Frontend Deploy
+        run: curl -X POST ${{ secrets.RENDER_DEPLOY_HOOK_FRONTEND }}
