@@ -5,3 +5,9 @@ services:
     rootDir: server
     buildCommand: npm install && npm run build
     startCommand: npm run start
+  
+  - type: static
+    name: sixscripts-web
+    buildCommand: cd client && npm install && npm run build
+    publishDir: client/dist
+    rootDir: .
