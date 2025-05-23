@@ -1,4 +1,4 @@
-import express from 'express';
+import express, { Request, Response, RequestHandler } from 'express';
 import dotenv from 'dotenv';
 import cors from 'cors';
 import agentRouter from './routes/agent';
@@ -12,7 +12,11 @@ app.use(cors());
 app.use(express.json());
 app.use('/agent', agentRouter);
 
-app.get('/', (_, res) => res.send('Sixscripts AI Backend Running'));
+const healthCheck: RequestHandler = (_: Request, res: Response) => {
+  res.send('Sixscripts AI Backend Running');
+};
+
+app.get('/', healthCheck);
 
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
